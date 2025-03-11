@@ -17,8 +17,9 @@ df.show()
 
 
 
-# 2nd block in zeppeline
 
+# 2nd block in zeppeline
+# Implementation of "Where to Fly"
 from pyspark.sql import functions as F
 
 # Get user input for starting airport and travel time
@@ -58,3 +59,9 @@ df_sorted = df_grouped.orderBy('lowestFare')
 
 # Show the top 10 destinations with their lowest fare and travel duration
 df_sorted.select('destinationAirport', 'lowestFare', 'minTravelDuration').show(10)
+
+
+
+
+
+

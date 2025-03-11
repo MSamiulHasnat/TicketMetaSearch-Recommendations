@@ -19,6 +19,8 @@ df.show()
 
 # 2nd block in zeppeline
 
+from pyspark.sql import functions as F
+
 # Get user input for starting airport and travel time
 starting_airport = "ATL"  # Example input
 max_travel_duration = 3  # Maximum travel duration in hours
@@ -45,8 +47,14 @@ df_filtered = df.filter(
     (df['travelDurationHours'] <= max_travel_duration)
 )
 
-# Sort by totalFare to find the lowest cost destinations
-df_sorted = df_filtered.orderBy('totalFare')
+# Group by destination airport to remove duplicates, and select the lowest totalFare for each destination
+df_grouped = df_filtered.groupBy('destinationAirport').agg(
+    F.min('totalFare').alias('lowestFare'),
+    F.min('travelDurationHours').alias('minTravelDuration')
+)
 
-# Show the top 10 destinations with their fare and duration
-df_sorted.select('destinationAirport', 'totalFare', 'travelDurationHours').show(10)
+# Sort by lowestFare to show the cheapest destinations first
+df_sorted = df_grouped.orderBy('lowestFare')
+
+# Show the top 10 destinations with their lowest fare and travel duration
+df_sorted.select('destinationAirport', 'lowestFare', 'minTravelDuration').show(10)

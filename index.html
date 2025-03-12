@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>TMS9 - Ticket Meta Search</title>
+		<title>WSP ChatBot</title>
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -31,10 +31,8 @@
 	</head>
 	<body>
 		<div class="container">
-            <br>
-			<h2>Happy Traveling with TMS9</h2>
-            <br><br>
-			<!-- <div class="form-group">
+			<h2>Free ChatBot</h2>
+			<div class="form-group">
 				<input
 					type="text"
 					class="form-control"
@@ -42,63 +40,8 @@
 					placeholder="Enter your question" />
 			</div>
 			<button class="btn btn-success" onclick="sendMessage()">Ask!</button>
-			<div id="response"></div> -->
+			<div id="response"></div>
 		</div>
-
-
-        <!-- Dropdown menu container -->
-
-        <div class="container">
-            <!-- <h2>Happy Traveling with TMS9</h2> -->
-            
-            <!-- Dropdown menu for starting airport -->
-            <div class="form-group row">
-                <label for="startingAirport" class="col-sm-4 col-form-label">Select starting airport</label>
-                <div class="col-sm-8">
-                    <select class="form-control" id="startingAirport">
-                        <option value="">-- Select Airport --</option>
-                        <option value="airport1">JFK</option>
-                        <option value="airport2">OAK</option>
-                        <option value="airport3">LGA</option>
-                        <option value="airport3">BOS</option>
-                        <option value="airport3">EWR</option>
-                        <option value="airport3">DEN</option>
-                        <option value="airport3">IAD</option>
-                        <option value="airport3">CLT</option>
-                        <option value="airport3">MIA</option>
-                        <option value="airport3">DFW</option>
-                        <option value="airport3">SFO</option>
-                        <option value="airport3">ORD</option>
-                        <option value="airport3">DTW</option>
-                        <option value="airport3">LAX</option>
-                        <option value="airport3">ATL</option>
-                        <option value="airport3">PHL</option>
-                        <!-- Add more airport options as needed -->
-                    </select>
-                </div>
-            </div>
-            
-            <!-- Integer input for maximum travel duration -->
-            <div class="form-group row">
-                <label for="maxDuration" class="col-sm-4 col-form-label">Maximum travel duration</label>
-                <div class="col-sm-8">
-                    <input type="number" class="form-control" id="maxDuration" placeholder="Enter duration in hours" min="1" />
-                </div>
-            </div>
-
-            <button class="btn btn-success" onclick="sendMessage()" style="display: block; margin: 20px auto;">Ask</button>
-
-            
-            <!-- Ask button and response for the API Chatbot -->
-            <!-- <div class="form-group">
-                <input type="text" class="form-control" id="userInput" placeholder="Enter your question" />
-            </div>
-            <button class="btn btn-success" onclick="sendMessage()">Ask!</button>
-            <div id="response"></div> -->
-        </div>
-        
-
-        <!-- APT Integration -->
 		<script>
 			async function sendMessage() {
 				const input = document.getElementById('userInput').value;

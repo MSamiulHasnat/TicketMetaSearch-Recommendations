@@ -111,3 +111,61 @@ df_sorted.select('flightDate', 'lowestFare', 'minTravelDuration').show(10)
 
 
 
+
+
+
+
+
+
+
+
+#4th section of zepplin
+%pyspark
+
+from pyspark.sql.functions import col, datediff, to_date, month, dayofweek
+from pyspark.sql import functions as F
+
+# Load the itineraries data (assumes data is in 'itineraries_b' table in Hive)
+itineraries_df = spark.sql("SELECT flightDate, totalFare, startingAirport, destinationAirport FROM itineraries_b")
+
+# Convert flightDate to date type if needed
+itineraries_df = itineraries_df.withColumn("flightDate", to_date(col("flightDate"), "yyyy-MM-dd"))
+
+# Assuming bookingDate is available, we'll add a bookingDate column for lead time calculation (you'll need to adjust this based on actual column availability)
+# For now, let's assume you have a column `bookingDate` that is available and that it is in the same format as flightDate.
+
+# For the purpose of this example, let's generate a hypothetical `bookingDate` column (you will replace this with actual data from your source)
+itineraries_df = itineraries_df.withColumn("bookingDate", to_date(F.lit('2022-04-01'), "yyyy-MM-dd"))  # Placeholder bookingDate
+
+# Calculate booking lead time (days between booking and flight date)
+itineraries_df = itineraries_df.withColumn("bookingLeadTime", datediff(col("flightDate"), col("bookingDate")))
+
+# 1. Analyze how prices vary with booking lead time
+booking_lead_time_df = itineraries_df.groupBy("bookingLeadTime").agg(F.avg("totalFare").alias("avgFare"))
+
+# Show the result of average fare by booking lead time
+# booking_lead_time_df.show()
+z.show(booking_lead_time_df)
+
+# 2. Analyze fares by month
+itineraries_df = itineraries_df.withColumn("month", month(col("flightDate")))
+
+monthly_fares_df = itineraries_df.groupBy("month").agg(F.avg("totalFare").alias("avgFare"))
+
+# Show the result of average fare by month
+# monthly_fares_df.show()
+z.show(monthly_fares_df)
+
+# 3. Analyze fares by day of the week
+itineraries_df = itineraries_df.withColumn("dayOfWeek", dayofweek(col("flightDate")))
+
+day_of_week_fares_df = itineraries_df.groupBy("dayOfWeek").agg(F.avg("totalFare").alias("avgFare"))
+
+# Show the result of average fare by day of the week
+# day_of_week_fares_df.show()
+z.show(day_of_week_fares_df)
+
+
+# Finding the Best Time to Buy Tickets
+
+

@@ -64,4 +64,52 @@ df_sorted.select('destinationAirport', 'lowestFare', 'minTravelDuration').show(1
 
 
 
+# 3rd Block of Zeppelin
+# Implementation of "When to Fly"
+# Define the starting and destination airports
+starting_airport = "JFK"  # Starting airport
+destination_airport = "ORD"  # Destination airport
+
+# Load data into a DataFrame from Hive
+df = spark.sql("SELECT * FROM itineraries")
+
+# Convert flightDate and searchDate to DateType
+df = df.withColumn("flightDate", F.to_date("flightDate", "MM/dd/yyyy"))
+df = df.withColumn("searchDate", F.to_date("searchDate", "MM/dd/yyyy"))
+
+# Extract hours and minutes from travelDuration to calculate travel hours
+df = df.withColumn(
+    "travelDurationHours",
+    F.when(
+        df["travelDuration"].contains("H"),
+        F.regexp_extract(df["travelDuration"], r"(\d+)H", 1).cast("double")
+    ).otherwise(0) +
+    F.when(
+        df["travelDuration"].contains("M"),
+        F.regexp_extract(df["travelDuration"], r"(\d+)M", 1).cast("double") / 60
+    ).otherwise(0)
+)
+
+# Filter the data based on the starting and destination airports
+df_filtered = df.filter(
+    (df['startingAirport'] == starting_airport) &
+    (df['destinationAirport'] == destination_airport)
+)
+
+# Group by flightDate to calculate the lowest fare and minimum travel duration for each flight date
+df_grouped = df_filtered.groupBy('flightDate').agg(
+    F.min('totalFare').alias('lowestFare'),
+    F.min('travelDurationHours').alias('minTravelDuration')
+)
+
+# Remove duplicates for lowestFare (ensure distinct lowest fare only)
+df_distinct = df_grouped.dropDuplicates(['lowestFare'])
+
+# Sort by lowestFare (ascending order)
+df_sorted = df_distinct.orderBy('lowestFare')
+
+# Show the results: Flight date, Lowest fare, and Minimum travel duration
+df_sorted.select('flightDate', 'lowestFare', 'minTravelDuration').show(10)
+
+
 

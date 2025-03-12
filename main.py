@@ -16,8 +16,6 @@ df.show()
 
 
 
-
-
 # 2nd block in zeppeline
 # Implementation of "Where to Fly"
 from pyspark.sql import functions as F

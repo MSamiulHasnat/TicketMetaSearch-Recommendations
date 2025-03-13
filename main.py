@@ -163,6 +163,7 @@ day_of_week_fares_df = itineraries_df.groupBy("dayOfWeek").agg(F.avg("totalFare"
 
 # Show the result of average fare by day of the week
 # day_of_week_fares_df.show()
+#Check in
 z.show(day_of_week_fares_df)
 
 

@@ -84,7 +84,7 @@ where_to_fly_with_budget_and_time('ATL', 240, 300)  # For example, departing fro
 
 # 3rd Block of Zeppelin
 # Implementation of "When to Fly"
-# Define the starting and destination airports
+
 %pyspark
 
 from pyspark.sql.functions import dayofweek, col, date_format
@@ -123,7 +123,7 @@ def when_to_fly_with_time(startingAirport, destinationAirport, travelTime):
     filtered_df = filtered_df.filter(filtered_df.travelDurationInMinutes <= travelTime)
     
     # Group by flightDate and calculate the minimum fare for each date
-    result_df = filtered_df.groupBy("flightDate").agg(
+    result_df = filtered_df.groupBy("startingAirport", "destinationAirport", "flightDate").agg(
         {"totalFare": "min"}
     )
     
@@ -133,7 +133,7 @@ def when_to_fly_with_time(startingAirport, destinationAirport, travelTime):
     # Convert the flightDate to the day of the week (Monday, Tuesday, etc.)
     result_df = result_df.withColumn("dayOfWeek", date_format(col("flightDate"), "EEEE"))
     
-    # Show the result: flight date, day of the week, and lowest fare
+    # Show the result: startingAirport, destinationAirport, flightDate, day of the week, and lowest fare
     result_df.show()
 
 # Example usage:

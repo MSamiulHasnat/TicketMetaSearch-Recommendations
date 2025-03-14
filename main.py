@@ -89,9 +89,10 @@ where_to_fly_with_budget_and_time('ATL', 240, 300)  # For example, departing fro
 
 from pyspark.sql.functions import dayofweek, col, date_format
 from pyspark.sql.types import StringType
+import re
 
 # Define a function for the "When to Fly" feature with parameter names matching previous code
-def when_to_fly_with_time(startingAirport, destinationAirport, travelTime):
+def when_to_fly_with_time_as_sql(startingAirport, destinationAirport, travelTime):
     # Load the itineraries data from Hive
     itineraries_df = spark.sql("SELECT startingAirport, destinationAirport, totalFare, flightDate, travelDuration FROM itineraries_b")
     
@@ -101,7 +102,6 @@ def when_to_fly_with_time(startingAirport, destinationAirport, travelTime):
     
     # Convert travelDuration (which is in format PTxHxM) to minutes
     from pyspark.sql.functions import udf
-    import re
     from pyspark.sql.types import IntegerType
     
     # UDF to convert travel duration from PT2H30M to minutes
@@ -133,11 +133,21 @@ def when_to_fly_with_time(startingAirport, destinationAirport, travelTime):
     # Convert the flightDate to the day of the week (Monday, Tuesday, etc.)
     result_df = result_df.withColumn("dayOfWeek", date_format(col("flightDate"), "EEEE"))
     
-    # Show the result: startingAirport, destinationAirport, flightDate, day of the week, and lowest fare
+    # Show the result
     result_df.show()
+    
+    # # Convert the dataframe rows to SQL INSERT statements
+    # def row_to_sql(row):
+    #     return f"INSERT INTO flights_table (startingAirport, destinationAirport, flightDate, dayOfWeek, lowestFare) " \
+    #           f"VALUES ('{row.startingAirport}', '{row.destinationAirport}', '{row.flightDate}', '{row.dayOfWeek}', {row.lowestFare});"
+    
+    # sql_rdd = result_df.rdd.map(row_to_sql)
+    
+    # # Save the SQL statements as a text file with a .sql extension in HDFS
+    # # sql_rdd.coalesce(1).saveAsTextFile("/output/whereToFly/WhereToFly_As_SQL.sql")
 
 # Example usage:
-when_to_fly_with_time('ATL', 'BOS', 240)  # For example, departing from ATL to BOS, travel time of 240 minutes
+when_to_fly_with_time_as_sql('ATL', 'BOS', 240)  # For example, departing from ATL to BOS, travel time of 240 minutes
 
 # Implemented When to fly
 
@@ -202,3 +212,24 @@ z.show(day_of_week_fares_df)
 # Finding the Best Time to Buy Tickets
 
 
+
+
+
+
+#added busiest routes
+%pyspark
+
+from pyspark.sql import functions as F
+
+# Load the itineraries data
+itineraries_df = spark.sql("SELECT startingAirport, destinationAirport FROM itineraries_b")
+
+# Group by startingAirport and destinationAirport, and count the number of flights for each route
+busiest_routes_df = itineraries_df.groupBy("startingAirport", "destinationAirport") \
+                                  .agg(F.count("*").alias("numFlights"))
+
+# Sort the routes by the number of flights in descending order and get the top 10 busiest routes
+top_10_busiest_routes_df = busiest_routes_df.orderBy(F.col("numFlights").desc()).limit(20)
+
+# Show the top 10 busiest routes
+top_10_busiest_routes_df.show()

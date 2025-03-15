@@ -1,0 +1,132 @@
+{
+  "airports": [
+    {
+      "code": "JFK",
+      "name": "John F. Kennedy International Airport",
+      "city": "New York City",
+      "region": "NY, USA",
+      "latitude": 40.6413,
+      "longitude": -73.7781
+    },
+    {
+      "code": "OAK",
+      "name": "Oakland International Airport",
+      "city": "Oakland",
+      "region": "CA, USA",
+      "latitude": 37.7214,
+      "longitude": -122.2207
+    },
+    {
+      "code": "LGA",
+      "name": "LaGuardia Airport",
+      "city": "Queens (NYC)",
+      "region": "NY, USA",
+      "latitude": 40.7772,
+      "longitude": -73.8726
+    },
+    {
+      "code": "BOS",
+      "name": "Logan International Airport",
+      "city": "Boston",
+      "region": "MA, USA",
+      "latitude": 42.3656,
+      "longitude": -71.0096
+    },
+    {
+      "code": "EWR",
+      "name": "Newark Liberty International Airport",
+      "city": "Newark",
+      "region": "NJ, USA",
+      "latitude": 40.6925,
+      "longitude": -74.1686
+    },
+    {
+      "code": "DEN",
+      "name": "Denver International Airport",
+      "city": "Denver",
+      "region": "CO, USA",
+      "latitude": 39.8561,
+      "longitude": -104.6737
+    },
+    {
+      "code": "IAD",
+      "name": "Washington Dulles International Airport",
+      "city": "Dulles (DC area)",
+      "region": "VA, USA",
+      "latitude": 38.9531,
+      "longitude": -77.4565
+    },
+    {
+      "code": "CLT",
+      "name": "Charlotte Douglas International Airport",
+      "city": "Charlotte",
+      "region": "NC, USA",
+      "latitude": 35.214,
+      "longitude": -80.9431
+    },
+    {
+      "code": "MIA",
+      "name": "Miami International Airport",
+      "city": "Miami",
+      "region": "FL, USA",
+      "latitude": 25.7933,
+      "longitude": -80.2906
+    },
+    {
+      "code": "DFW",
+      "name": "Dallas/Fort Worth International Airport",
+      "city": "Dallas/Fort Worth",
+      "region": "TX, USA",
+      "latitude": 32.8998,
+      "longitude": -97.0403
+    },
+    {
+      "code": "SFO",
+      "name": "San Francisco International Airport",
+      "city": "San Francisco",
+      "region": "CA, USA",
+      "latitude": 37.6189,
+      "longitude": -122.375
+    },
+    {
+      "code": "ORD",
+      "name": "O’Hare International Airport",
+      "city": "Chicago",
+      "region": "IL, USA",
+      "latitude": 41.9786,
+      "longitude": -87.9048
+    },
+    {
+      "code": "DTW",
+      "name": "Detroit Metropolitan Wayne County Airport",
+      "city": "Detroit (Romulus)",
+      "region": "MI, USA",
+      "latitude": 42.2124,
+      "longitude": -83.3534
+    },
+    {
+      "code": "LAX",
+      "name": "Los Angeles International Airport",
+      "city": "Los Angeles",
+      "region": "CA, USA",
+      "latitude": 33.9416,
+      "longitude": -118.4085
+    },
+    {
+      "code": "ATL",
+      "name": "Hartsfield-Jackson Atlanta International Airport",
+      "city": "Atlanta",
+      "region": "GA, USA",
+      "latitude": 33.6407,
+      "longitude": -84.4277
+    },
+    {
+      "code": "PHL",
+      "name": "Philadelphia International Airport",
+      "city": "Philadelphia",
+      "region": "PA, USA",
+      "latitude": 39.8719,
+      "longitude": -75.2411
+    }
+  ]
+}

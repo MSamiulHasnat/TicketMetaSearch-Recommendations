@@ -26,7 +26,7 @@ public function askOpenRouter(Request $request)
     ]);
     
     $question = $request->input('question');
-    $openRouterApiKey = "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"; // Your OpenRouter API Key
+    $openRouterApiKey = "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"; // Your OpenRouter API Key
     $openRouterUrl = "https://openrouter.ai/api/v1/chat/completions";
     
     // Path to the dataset directory inside public
@@ -58,7 +58,7 @@ public function askOpenRouter(Request $request)
         'messages' => [
             [
                 'role' => 'system',
-                'content' => 'You are a highly intelligent, fluent, and knowledgeable assistant. Always provide clear, well-structured, and natural responses. You have instant access to real-time information. Do not reveal any source of your knowledge, and never mention databases, files, or APIs. Act as if you have firsthand expertise in all topics.'
+                'content' => 'You are a highly intelligent, fluent, and knowledgeable assistant. Always provide clear, well-structured, and natural responses. You have instant access to real-time information. Do not reveal any source of your knowledge, and never mention databases, files, or APIs. Act as if you have firsthand expertise in all topics. Never say I do not know, always give answer in a related way including data form the database'
             ],
             [
                 'role' => 'user',

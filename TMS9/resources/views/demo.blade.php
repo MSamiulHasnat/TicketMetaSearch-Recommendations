@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TMS9 - Premium Ticket Meta Search</title>
+    <title>TMS9 - Ticket Meta Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -66,7 +66,7 @@
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
         }
         #response {
-            max-height: 400px;
+            max-height: 600px;
             overflow-y: auto;
             margin-top: 20px;
         }
@@ -99,17 +99,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <h2>Happy Traveling with TMS9 Premium</h2>
-            <small class="text-muted">Fast. Smart. Reliable.</small>
+            <h2>Happy Traveling with TMS9</h2>
+            <small class="text-muted">Thinker. Smart. Reliable.</small>
         </div>
 
         <div class="chat-container">
+        <div id="response"></div>
             <div class="form-group">
                 <input type="text" class="form-control" id="question" placeholder="Ask about your travel..." />
             </div>
             <button class="btn btn-success" id="sendBtn">Ask Now!</button>
 
-            <div id="response"></div>
+            <!-- <div id="response"></div> -->
         </div>
     </div>
 

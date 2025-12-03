@@ -26,7 +26,7 @@ public function askOpenRouter(Request $request)
     ]);
     
     $question = $request->input('question');
-    $openRouterApiKey = "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"; // Your OpenRouter API Key
+    $openRouterApiKey = "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"; // Your OpenRouter API Key
     $openRouterUrl = "https://openrouter.ai/api/v1/chat/completions";
     
     // Path to the dataset directory inside public
